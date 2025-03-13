@@ -1,10 +1,6 @@
-const express = require("express");
-const app = express();
+import app from "./src/app.js";
+import { PORT } from "./src/config/env.js";
 
-app.get("/", (req, res) => {
-	res.send("Hello, Xomly!");
-});
-
-app.listen(3000, () => {
-	console.log("Server running on port 3000");
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
