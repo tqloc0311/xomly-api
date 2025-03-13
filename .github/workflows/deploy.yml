@@ -30,4 +30,4 @@ jobs:
             docker pull ${{ secrets.DOCKER_USERNAME }}/xomly-api
             docker stop xomly-api || true
             docker rm xomly-api || true
-            docker run -d -p 3000:3000 --name xomly-api ${{ secrets.DOCKER_USERNAME }}/xomly-api
+            docker run -d -p 3000:3000 --env-file .env --name xomly-api ${{ secrets.DOCKER_USERNAME }}/xomly-api
