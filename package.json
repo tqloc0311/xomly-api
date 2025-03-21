@@ -1,5 +1,6 @@
 {
   "name": "xomly-api",
+  "types": "json",
   "version": "1.0.0",
   "type": "module",
   "main": "index.js",
@@ -14,21 +15,32 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.772.0",
     "@aws-sdk/client-s3": "^3.758.0",
     "@aws-sdk/client-sts": "^3.758.0",
     "@aws-sdk/s3-request-presigner": "^3.758.0",
+    "@aws-sdk/util-dynamodb": "^3.772.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "firebase-admin": "^13.2.0",
+    "jsonwebtoken": "^9.0.2",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.26.10",
     "@eslint/js": "^9.22.0",
     "eslint": "^9.22.0",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-prettier": "^5.2.3",
     "nodemon": "^3.1.9",
     "prettier": "^3.5.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@firebase/util",
+      "protobufjs"
+    ]
   }
 }

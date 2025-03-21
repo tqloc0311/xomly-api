@@ -1,6 +1,7 @@
 import js from "@eslint/js";
 import prettier from "eslint-plugin-prettier";
 import prettierConfig from "eslint-config-prettier";
+import babel from "@babel/eslint-parser";
 
 export default [
   js.configs.recommended,
@@ -10,6 +11,15 @@ export default [
   },
   {
     languageOptions: {
+      parser: babel,
+      parserOptions: {
+        requireConfigFile: false,
+        ecmaVersion: 2024,
+        sourceType: "module",
+        ecmaFeatures: {
+          impliedStrict: true,
+        },
+      },
       globals: {
         process: "readonly",
         console: "readonly",
