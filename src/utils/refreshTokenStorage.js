@@ -3,7 +3,6 @@ import {
   PutItemCommand,
   DeleteItemCommand,
   QueryCommand,
-  ListTablesCommand,
 } from "@aws-sdk/client-dynamodb";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 import {
@@ -40,22 +39,17 @@ export const getRefreshToken = async (token) => {
       "#token": "token",
     },
     ExpressionAttributeValues: {
-      ":token": token,
+      ":token": { S: token },
     },
   };
 
-  console.log("QueryCommand Parameters:", JSON.stringify(params, null, 2));
-
   try {
     const command = new QueryCommand(params);
-
     const result = await client.send(command);
 
-    console.log("DynamoDB Result:", JSON.stringify(result, null, 2));
-
-    // if (result.Items && result.Items.length > 0) {
-    //   return unmarshall(result.Items[0]);
-    // }
+    if (result.Items && result.Items.length > 0) {
+      return unmarshall(result.Items[0]);
+    }
     return null;
   } catch (error) {
     console.error("Error getting refresh token:", error);

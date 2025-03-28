@@ -20,7 +20,6 @@ const login = async (req, res) => {
     await storeRefreshToken(decodedToken.uid, refreshToken);
 
     return res.status(200).json({
-      message: "Login successful",
       accessToken: accessToken,
       refreshToken: refreshToken,
     });
