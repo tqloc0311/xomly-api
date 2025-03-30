@@ -40,6 +40,7 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "@firebase/util",
+      "@scarf/scarf",
       "protobufjs"
     ]
   }
