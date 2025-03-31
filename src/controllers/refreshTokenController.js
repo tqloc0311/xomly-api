@@ -7,6 +7,7 @@ import {
   storeRefreshToken,
   deleteRefreshToken,
 } from "../utils/refreshTokenStorage.js";
+import userService from "../services/userService.js";
 
 const refreshToken = async (req, res) => {
   const refreshToken = req.body.refreshToken;
@@ -18,11 +19,6 @@ const refreshToken = async (req, res) => {
   try {
     const storedToken = await getRefreshToken(refreshToken);
 
-    console.log(
-      "🚀 ~ refreshTokenController.js:21 ~ refreshToken ~ storedToken:",
-      storedToken
-    );
-
     if (!storedToken) {
       return res.status(401).json({ error: "Invalid refresh token" });
     }
@@ -32,18 +28,26 @@ const refreshToken = async (req, res) => {
     const decodedUser = { uid: storedToken.userId };
     const newAccessToken = generateAccessToken(decodedUser);
 
-    console.log(
-      "🚀 ~ refreshTokenController.js:30 ~ refreshToken ~ decodedUser:",
-      decodedUser
-    );
-
     const newRefreshToken = generateRefreshToken(decodedUser);
+
+    const user = await userService.getUserByUid(decodedUser.uid);
 
     await storeRefreshToken(decodedUser.uid, newRefreshToken);
 
     return res.status(200).json({
-      accessToken: newAccessToken,
-      refreshToken: newRefreshToken,
+      credentials: {
+        accessToken: newAccessToken,
+        refreshToken: newRefreshToken,
+      },
+      user: {
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+        phoneNumber: user.phoneNumber,
+        emailVerified: user.emailVerified,
+        disabled: user.disabled,
+      },
     });
   } catch (error) {
     console.error("Token refresh error:", error);

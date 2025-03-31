@@ -9,6 +9,7 @@ export const S3_BUCKET_NAME = process.env.S3_BUCKET_NAME;
 export const S3_EXPIRES_IN_SECONDS = 60;
 export const DEFAULT_ADMIN_EMAIL = process.env.DEFAULT_ADMIN_EMAIL;
 export const DEFAULT_ADMIN_PASSWORD = process.env.DEFAULT_ADMIN_PASSWORD;
+export const DEFAULT_ADMIN_NAME = process.env.DEFAULT_ADMIN_NAME;
 export const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 export const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET;
 export const DYNAMODB_REFRESH_TOKEN_TABLE_NAME =

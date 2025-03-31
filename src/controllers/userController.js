@@ -8,7 +8,7 @@ const createUser = async (req, res) => {
       return res.status(400).json({ error: "Email is required" });
     }
 
-    const { userRecord } =
+    const { userRecord, setPasswordLink } =
       await userService.createUserWithEmailVerification(email);
 
     return res.status(201).json({
@@ -16,6 +16,7 @@ const createUser = async (req, res) => {
         "User created successfully. Please check your email to set your password.",
       userId: userRecord.uid,
       email: userRecord.email,
+      setPasswordLink,
     });
   } catch (error) {
     if (error.message === "User already exists") {
